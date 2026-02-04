@@ -1,4 +1,4 @@
-name : LostArk market quant CI/CD
+name : LostArk quant CI/CD
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
           context: .
           push : true
           # docker-compose.yaml이랑 이미지 이름 같게
-          tags : ${{ secrets.DOCKERHUB_USERNAME }}/loa-quant:latest
+          tags : ${{ secrets.DOCKERHUB_USERNAME }}/lostark_quant:latest
 
   deploys : 
     needs : build-and-push
@@ -39,8 +39,8 @@ jobs:
           key: ${{ secrets.AWS_SSH_KEY }}
           script : |
             # 프로젝트 폴더로 이동 (없으면 생성)
-            mkdir -p ~/loa-project
-            cd ~/loa-project
+            mkdir -p ~/lostark_quant
+            cd ~/lostark_quant
             
             # 서버에 .env파일 넣기
             echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" > .env
@@ -55,8 +55,8 @@ jobs:
             version: "3.8"
             services:
               app:
-                image: ${{ secrets.DOCKERHUB_USERNAME }}/loa-quant:latest
-                container_name: loa-streamlit
+                image: ${{ secrets.DOCKERHUB_USERNAME }}/lostark_quant:latest
+                container_name: lostark-streamlit
                 restart: always
                 env_file:
                   - .env
@@ -65,6 +65,5 @@ jobs:
             EOF
 
             # 최신 이미지 가져오기
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/loa-quant:latest
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/lostark_quant:latest
             sudo docker-compose up -d
-            

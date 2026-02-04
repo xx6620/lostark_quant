@@ -1,8 +1,8 @@
 services:
   app:
     build: .
-    image: ${DOCKER_USERNAME}/loa-quant:latest
-    container_name: loa-streamlit
+    image: ${DOCKER_USERNAME}/lostark_quant:latest
+    container_name: lostark_quant
     restart: always
     env_file: .env
     ports:
