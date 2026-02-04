@@ -211,7 +211,7 @@ st.caption(
 
 # Streamlit 멀티페이지용 내비게이션 링크
 st.page_link(
-	"pages/투자_시뮬레이션.py",  # 투자 모드 페이지 파일 경로
+	"pages/simulation.py",  # 투자 모드 페이지 파일 경로
 	label="투자 시뮬레이션 페이지 열기",
 	icon="➡️",
 )
